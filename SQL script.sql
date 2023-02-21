@@ -29,6 +29,15 @@ group by genre
 User rating for Fiction is 4.6, Non-Fiction 4.7 
 
 3) How does price differ for Fiction and Non Fiction books?
+select genre, sum(price)
+from amazon a 
+group by genre
+
+Genre		Price
+Fiction		2604
+Non Fiction	4601
+
+How does price differ for Fiction and Non Fiction books over years?
 
 select genre, year, price
 from amazon a 
@@ -112,10 +121,14 @@ from amazon
 group by genre, "year"
 order by "year" asc, genre asc;
 
-12) Amazon top 50 books each year
 
-select *
+12) Amazon top 50 books by user rating from 2009-19
+
+select name, "User Rating", year
 from amazon
+group by "User Rating", year
+order by "User Rating" desc
 limit 50;
+
 
 
