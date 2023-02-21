@@ -1,11 +1,16 @@
 
-## First and foremost part is import file and then look at the data before take any actions.
+## First we import the file and then look at the data before take any actions.
 
 Let's look at our data. 
 
 select *
 from amazon;
 
+We see that the data contain 550 rows(50 rows per year according to the title name from 2009-19) and 7 columns each categorized:
+
+Name, Author, User Rating, Reviews, Price, Year, Genre
+
+Now, it's time to answer the questions.
 
 1) Which genre has the most books in this category?
 
@@ -13,6 +18,7 @@ select genre, count(genre) as count_genres
 from amazon 
 group by genre
 
+Fiction 240, Non-Fiction 310 books
 
 2) How do user ratings differ for each genre?
 
@@ -20,12 +26,27 @@ select genre, "User Rating"
 from amazon
 group by genre
 
+User rating for Fiction is 4.6, Non-Fiction 4.7 
 
 3) How does price differ for Fiction and Non Fiction books?
 
-select genre, sum(price)
+select genre, year, price
 from amazon a 
-group by genre
+group by year, genre
+order by genre desc;
+
+Genre		Year  Price        Genre	Year  Price
+Non Fiction	2009	17  	|  Fiction	2009	13
+Non Fiction	2010	2    	|  Fiction	2010	11
+Non Fiction	2011	32 	|  Fiction	2011	22
+Non Fiction	2012	24	|  Fiction	2012	11	
+Non Fiction	2013	10	|  Fiction	2013	13
+Non Fiction	2014	28	|  Fiction	2014	30	
+Non Fiction	2015	6	|  Fiction	2015	14	
+Non Fiction	2016	8	|  Fiction	2016	8	
+Non Fiction	2017	9	|  Fiction	2017	6
+Non Fiction	2018	15	|  Fiction	2018	5	
+Non Fiction	2019	12	|  Fiction	2019	5
 
 
 4) Which genres have the highest and lowest ratings?
