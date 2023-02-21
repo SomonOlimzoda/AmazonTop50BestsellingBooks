@@ -4,8 +4,7 @@
 Let's look at our data. 
 
 select *
-from amazon
-limit 50;
+from amazon;
 
 
 1) Which genre has the most books in this category?
