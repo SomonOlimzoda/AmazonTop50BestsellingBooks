@@ -10,7 +10,14 @@ We see that the data contain 550 rows(50 rows per year according to the title na
 
 Name, Author, User Rating, Reviews, Price, Year, Genre
 
-Now, it's time to answer the questions.
+# Let's see if our data is clean 
+
+select distinct *
+from amazon
+
+There is no duplicated or null entries. 
+
+# Let's start our analysis 
 
 1) Which genre has the most books in this category?
 
