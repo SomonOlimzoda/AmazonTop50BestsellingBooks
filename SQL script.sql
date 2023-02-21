@@ -1,13 +1,11 @@
 
 ## First and foremost part is import file and then look at the data before take any actions.
 
+Simple qeury our data.
 
 
-1) Top 50 bestsdeller books
-select name, genre, "User Rating", year
+select *
 from amazon
-group by name
-order by "User Rating" desc
 limit 50;
 
 
