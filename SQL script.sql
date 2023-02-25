@@ -47,7 +47,7 @@ Genre		Price
 Fiction		2604
 Non Fiction	4601
 
-How does price differ for Fiction and Non Fiction books over years?
+-- How does price differ for Fiction and Non Fiction books over years?
 
 select genre, 
 year, 
@@ -56,21 +56,7 @@ from amazon a
 group by year, genre
 order by genre desc;
 
-Genre		Year  Price        Genre	Year  Price
-Non Fiction	2009	17  	|  Fiction	2009	13
-Non Fiction	2010	2    	|  Fiction	2010	11
-Non Fiction	2011	32 	|  Fiction	2011	22
-Non Fiction	2012	24	|  Fiction	2012	11	
-Non Fiction	2013	10	|  Fiction	2013	13
-Non Fiction	2014	28	|  Fiction	2014	30	
-Non Fiction	2015	6	|  Fiction	2015	14	
-Non Fiction	2016	8	|  Fiction	2016	8	
-Non Fiction	2017	9	|  Fiction	2017	6
-Non Fiction	2018	15	|  Fiction	2018	5	
-Non Fiction	2019	12	|  Fiction	2019	5
-
-
-4) Which genres have the highest and lowest ratings?
+-- Which genres have the highest and lowest ratings?
 
 select genre,
 max("user rating") as highest_rating, 
@@ -80,7 +66,7 @@ where genre = 'Non Fiction' or genre = 'Fiction'
 group by genre;
 
 
-5) Which genre is most popular and which have earned the most in this category?
+-- Which genre is most popular and which have earned the most in this category?
 
 select genre, 
 max("User Rating") as max_rating, 
@@ -90,7 +76,7 @@ group by genre
 order by total_earnings desc, max_rating desc;
 
 
-6) Which books have earned the most money in each genre?
+-- Which books have earned the most money in each genre?
 
 select genre, 
 sum(price)
@@ -98,7 +84,7 @@ from amazon
 group by genre
 
 
-7) Price of books of each genre over the years.
+-- Price of books of each genre over the years.
 
 select genre, 
 price, 
@@ -108,7 +94,7 @@ group by genre, "year"
 order by "year";
 
 
-8) How has been the customer reviews by genre over the years?
+-- How has been the customer reviews by genre over the years?
 
 select genre, 
 reviews, 
@@ -118,7 +104,7 @@ group by genre, "year"
 order by year
 
 
-9) The price range of books by each genre in the Bestsellers list
+-- The price range of books by each genre in the Bestsellers list
 
 select genre, 
 min(price) as min_price,
@@ -128,7 +114,7 @@ from amazon
 group by genre
 
 
-10) Reviews of books by genre for each year
+-- Reviews of books by genre for each year
 
 select genre, 
 "year", 
@@ -138,7 +124,7 @@ group by genre, "year"
 order by "year" asc, genre asc;
 
 
-11) The number of books by each genre over years
+-- The number of books by each genre over years
 
 select genre, 
 "year", 
@@ -148,7 +134,7 @@ group by genre, "year"
 order by "year" asc, genre asc;
 
 
-12) Amazon top 50 books by user rating from 2009-19
+-- Amazon top 50 books by user rating from 2009-19
 
 select name, 
 "User Rating", 
@@ -157,6 +143,100 @@ from amazon
 group by "User Rating", year
 order by "User Rating" desc
 limit 50;
+
+-- Most of the books were rated 4.6 or above, indicating that the overall rating of the books was high.
+
+select count(name),
+avg("user rating")
+from amazon a 
+group by "User Rating" 
+order by "User Rating" desc
+
+-- Author Jeff Kinney has the most 12 (fiction) books with in the Bestsellers List.
+
+select author,
+count(author),
+genre
+from amazon
+group by Author, genre
+order by count(author) desc
+
+-- Top 10 bestselling books by "User Rating" and Reviews 
+
+select *
+from amazon a 
+group by name, Reviews
+order by "User Rating" desc, Reviews desc
+limit 10
+
+
+-- Name of authors who wrote many books(top 10)
+
+select author,
+count(author)
+from amazon a 
+group by author
+order by count(author) desc
+limit 10;
+
+
+-- top 10 books by number of reviews
+
+select name, reviews, year
+from amazon a 
+order by Reviews desc, year desc
+limit 10;
+
+
+-- The majority of books have up to 10,000 reviews
+
+select reviews,
+count(Reviews)
+from amazon
+group by Reviews 
+order by Reviews  desc 
+
+
+-- Majority of user ratings are between 4.4 and 4.9
+
+select avg("User Rating"),
+count("User Rating")
+from amazon
+group by Name  
+order by "User Rating"  desc
+
+
+-- Majority of bestsetllers are priced between $8 and $9.
+
+select Price,
+count(price)
+from amazon
+group by price
+order by Price desc
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
